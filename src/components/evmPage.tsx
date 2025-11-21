@@ -69,7 +69,7 @@ const EvmPage = () => {
         );
 
         setPopupCandidate(candidate.candidateName);
-        setTimeout(() => setPopupCandidate(null), 4000);
+        setTimeout(() => setPopupCandidate(null), 7000);
       }, 3000);
     } catch (err) {
       console.error("Vote error:", err);
@@ -307,19 +307,28 @@ const EvmPage = () => {
           {popupCandidate && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
               <div className="bg-black/70 absolute inset-0"></div>
+
               <div
-                className="bg-white rounded-lg p-6 z-10 text-center shadow-lg"
+                className="bg-white rounded-xl p-6 mx-4 z-10 text-center shadow-2xl space-y-3"
                 style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
               >
-                <h2 className="text-lg font-bold text-green-600">
+                <h2 className="text-xl font-bold text-green-600">
                   धन्यवाद! 🗳️
                 </h2>
-                <p className="mt-2 text-md">
-                  आपण{" "}
-                  <span className="font-semibold text-blue-600">
-                    {popupCandidate}
+                <p className="text-md font-semibold">
+                  आपण आपले अमूल्य मत दिल्या बद्दल धन्यवाद 🙏
+                </p>
+
+                <p className="text-sm text-black font-semibold bg-gray-200 p-2 rounded-md shadow">
+                  मतदानाच्या दिवशीसुद्धा{" "}
+                  <span className="text-red-600 font-bold">
+                    {banner.symbolName}
                   </span>{" "}
-                  यांना आपले अमूल्य मत दिल्या बद्दल धन्यवाद.
+                  या चिन्हासमोरील बटन दाबून{" "}
+                  <span className="text-indigo-600 font-bold">
+                    {banner.candidateName}
+                  </span>{" "}
+                  यांना प्रचंड बहूमतांनी विजयी करा.
                 </p>
               </div>
             </div>
