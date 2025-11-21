@@ -313,6 +313,23 @@ const EvmPage = () => {
             </p>
           )}
 
+          {banner?.candidatePoster && (
+            <button
+              onClick={() => {
+                localStorage.removeItem("posterShown");
+                setShowPoster(true);
+              }}
+              className="
+    mx-auto mb-4 px-4 py-2 
+    bg-blue-600 text-white text-xs font-semibold 
+    rounded-full shadow-md hover:bg-blue-700 
+    transition-all duration-200 block
+  "
+            >
+              पोस्टर पहा
+            </button>
+          )}
+
           {/* POPUP */}
           {popupCandidate && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
