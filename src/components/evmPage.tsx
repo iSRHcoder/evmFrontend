@@ -144,11 +144,11 @@ const EvmPage = () => {
             <div className="relative mt-2 rounded-lg overflow-hidden">
               <div className="absolute inset-0 bg-black/10"></div>
 
-              <div className="relative z-10 flex items-center gap-2 p-2">
+              <div className="relative z-10 flex items-center justify-center gap-3 p-2">
                 <img
                   src={banner.candidatePhoto}
                   alt="candidate"
-                  className="w-22 h-28 sm:w-28 sm:h-35 object-cover rounded-lg shadow-lg border border-white"
+                  className="w-22 h-28 sm:w-28 sm:h-35 object-fill rounded-lg shadow-lg border border-white"
                 />
                 <div className="leading-snug">
                   <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
