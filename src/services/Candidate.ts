@@ -9,6 +9,7 @@ export interface CreateCandidateDto {
   party: string;
   wardNo: string;
   candidatePhoto: File; // file from input
+  candidatePoster?: File | null;
   symbolImage: File; // file from input
 }
 
@@ -24,6 +25,7 @@ export interface CandidateResponse {
   wardNo: string;
   candidatePhoto: string; // URL
   symbolImage: string; // URL
+  candidatePoster: string; // URL
   createdAt: string;
   updatedAt: string;
 }
@@ -51,6 +53,9 @@ export const createCandidate = async (
     formData.append("party", candidate.party);
     formData.append("wardNo", candidate.wardNo);
     formData.append("candidatePhoto", candidate.candidatePhoto);
+    if (candidate.candidatePoster) {
+      formData.append("candidatePoster", candidate.candidatePoster);
+    }
     formData.append("symbolImage", candidate.symbolImage);
 
     const response = await api.post<ApiResponse<CandidateResponse>>(

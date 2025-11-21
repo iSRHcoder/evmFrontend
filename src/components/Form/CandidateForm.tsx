@@ -12,6 +12,8 @@ export function CandidateForm() {
   const [serialNo, setSerialNo] = useState<number | "">("");
   const [wardNo, setWardNo] = useState("");
   const [candidatePhoto, setCandidatePhoto] = useState<File | null>(null);
+  const [candidatePoster, setCandidatePoster] = useState<File | null>(null);
+
   const [symbolImage, setSymbolImage] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,6 +37,7 @@ export function CandidateForm() {
       serialNo: Number(serialNo),
       wardNo,
       candidatePhoto,
+      candidatePoster: candidatePoster!,
       symbolImage,
     };
 
@@ -48,6 +51,7 @@ export function CandidateForm() {
       setConstituency("");
       setSerialNo("");
       setCandidatePhoto(null);
+      setCandidatePoster(null);
       setWardNo("");
       setSymbolImage(null);
     } else {
@@ -140,6 +144,18 @@ export function CandidateForm() {
             className="border p-2 rounded-lg"
             onChange={(e) =>
               e.target.files && setCandidatePhoto(e.target.files[0])
+            }
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="font-medium text-gray-700">Candidate Poster</label>
+          <input
+            type="file"
+            accept="image/*"
+            className="border p-2 rounded-lg"
+            onChange={(e) =>
+              e.target.files && setCandidatePoster(e.target.files[0])
             }
           />
         </div>

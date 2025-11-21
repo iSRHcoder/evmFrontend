@@ -5,6 +5,27 @@
   text-align: center;
 }
 
+/* Blink */
+@keyframes blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.animate-blink {
+  animation: blink 1.3s infinite;
+}
+
+/* Shine highlight */
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+
+
+
 .logo {
   height: 6em;
   padding: 1.5em;

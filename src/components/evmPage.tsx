@@ -14,6 +14,9 @@ const EvmPage = () => {
   const [loading, setLoading] = useState(true);
   const [voted, setVoted] = useState<string | null>(storedVote);
   const [popupCandidate, setPopupCandidate] = useState<string | null>(null);
+  const [showPoster, setShowPoster] = useState(() => {
+    return !localStorage.getItem("posterShown");
+  });
 
   useEffect(() => {
     const loadCandidates = async () => {
@@ -35,6 +38,14 @@ const EvmPage = () => {
 
     loadCandidates();
   }, [id]);
+
+  const banner = candidates[0];
+
+  if (!banner) {
+    return (
+      <div className="p-4 text-center text-gray-500">No candidates found</div>
+    );
+  }
 
   const handleVote = async (candidateId: string) => {
     if (voted) return; // prevent revoting
@@ -86,8 +97,6 @@ const EvmPage = () => {
   if (!id)
     return <div className="p-4 text-center text-xl">Invalid Link ❌</div>;
 
-  const banner = candidates[0];
-
   if (!banner) {
     return (
       <div className="p-4 text-center text-gray-500">No candidates found</div>
@@ -99,6 +108,42 @@ const EvmPage = () => {
     const serial = i + 1;
     return candidates.find((c) => Number(c.serialNo) === serial) || null;
   });
+
+  console.log(banner.candidatePoster);
+
+  if (showPoster && banner?.candidatePoster) {
+    return (
+      <div className="w-full min-h-screen bg-black flex flex-col items-center">
+        <img
+          src={banner.candidatePoster}
+          alt="poster"
+          className="w-full max-h-[85vh] mt-3  object-contain bg-black"
+        />
+
+        <button
+          onClick={() => {
+            localStorage.setItem("posterShown", "true");
+            setShowPoster(false);
+          }}
+          className="
+    relative mt-2 mb-2 
+    bg-linear-to-r from-blue-600 to-blue-500
+    text-white font-extrabold tracking-wide
+    px-6 py-3 rounded-full shadow-2xl
+    hover:scale-110 transition-all duration-300
+    animate-blink
+    overflow-hidden
+  "
+        >
+          पुढे जा / to vote
+          {/* Glow ring */}
+          <span className="absolute inset-0 rounded-full ring-4 ring-blue-300 opacity-60 animate-pulse"></span>
+          {/* Soft moving highlight */}
+          <span className="absolute inset-0 bg-white opacity-10 blur-xl animate-[shine_2s_infinite]"></span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
