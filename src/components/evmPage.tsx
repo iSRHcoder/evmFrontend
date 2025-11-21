@@ -105,7 +105,7 @@ const EvmPage = () => {
       {candidates.length === 0 ? (
         <div className="p-4 text-center text-gray-500">No candidates found</div>
       ) : (
-        <div className="w-full max-w-lg mx-auto bg-white shadow rounded-md overflow-hidden">
+        <div className="w-full p-2 mx-auto bg-white shadow rounded-md overflow-hidden">
           {/* HEADER & MAIN BANNER */}
           <div className="w-full bg-[#086cae] text-white p-2 rounded-lg overflow-hidden">
             <div
