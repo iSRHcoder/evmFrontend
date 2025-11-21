@@ -140,7 +140,7 @@ const EvmPage = () => {
               className="bg-white sm:text-lg text-[15px] text-black font-bold text-center pt-2 rounded-md shadow"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
-              {banner.constituency} नगरपालिका सार्वत्रिक निवडणूक २०२५
+              {banner.constituency} नगरपालिका सार्वत्रिक निवडणूक 2025
             </div>
 
             <div className="relative mt-2 rounded-lg overflow-hidden">
@@ -203,8 +203,11 @@ const EvmPage = () => {
 
           {/* DATE */}
           <div className="w-full text-xs bg-[#086cae] rounded-2xl mt-2">
-            <p className="text-white font-semibold text-[12px] p-2">
-              मतदान दिनांक: ०२ डिसेंबर २०२५, वेळ: सकाळी ०७:०० ते सायं. ०५:००
+            <p
+              className="text-white font-semibold text-[13px] p-2"
+              style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+            >
+              मतदान दिनांक: 02 डिसेंबर 2025, वेळ: सकाळी 07:00 ते सायं. 05:30
             </p>
           </div>
 
@@ -324,7 +327,7 @@ const EvmPage = () => {
                   <span className="text-red-600 font-bold">
                     {banner.symbolName}
                   </span>{" "}
-                  या चिन्हासमोरील बटन दाबून{" "}
+                  या चिन्हासमोरील बटन दाबून <br />
                   <span className="text-indigo-600 font-bold">
                     {banner.candidateName}
                   </span>{" "}
