@@ -165,7 +165,7 @@ const EvmPage = () => {
                       {banner.wardNo}
                     </span>{" "}
                     मधील{" "}
-                    {banner.party ? (
+                    {banner.party !== "no" ? (
                       <span>
                         <span className="text-green-400 font-bold">
                           {banner.party}
