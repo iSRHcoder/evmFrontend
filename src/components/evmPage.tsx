@@ -92,8 +92,6 @@ const EvmPage = () => {
     return candidates.find((c) => Number(c.serialNo) === serial) || null;
   });
 
-  console.log(banner.candidatePoster);
-
   if (showPoster && banner?.candidatePoster) {
     return (
       <div className="w-full min-h-screen bg-black flex flex-col items-center">
@@ -167,10 +165,16 @@ const EvmPage = () => {
                       {banner.wardNo}
                     </span>{" "}
                     मधील{" "}
-                    <span className="text-green-400 font-bold">
-                      {banner.party}
-                    </span>
-                    चे अधिकृत उमेदवार
+                    {banner.party ? (
+                      <span>
+                        <span className="text-green-400 font-bold">
+                          {banner.party}
+                        </span>{" "}
+                        चे अधिकृत उमेदवार
+                      </span>
+                    ) : (
+                      <span>अपक्ष उमेदवार</span>
+                    )}
                   </div>
                   <div className="flex flex-col xs:flex-row justify-around items-center gap-1">
                     <h1
@@ -268,7 +272,7 @@ const EvmPage = () => {
                           ></div>
                           <button
                             onClick={() => handleVote(c._id)}
-                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-sm `}
+                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-sm`}
                           >
                             बटन
                           </button>
