@@ -203,7 +203,7 @@ const EvmPage = () => {
 
           {/* DATE */}
           <div className="w-full text-xs bg-[#086cae] rounded-2xl mt-2">
-            <p className="text-white font-semibold text-[10px] p-2">
+            <p className="text-white font-semibold text-[12px] p-2">
               मतदान दिनांक: ०२ डिसेंबर २०२५, वेळ: सकाळी ०७:०० ते सायं. ०५:००
             </p>
           </div>
