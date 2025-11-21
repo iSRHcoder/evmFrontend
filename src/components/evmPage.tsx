@@ -142,14 +142,6 @@ const EvmPage = () => {
             </div>
 
             <div className="relative mt-2 rounded-lg overflow-hidden">
-              {/* <div
-                className="absolute inset-0 bg-cover bg-center opacity-30"
-                style={{
-                  backgroundImage: `url('/bg.png')`,
-                  backgroundSize: "auto 100%", // height fits div, width scales automatically
-                  backgroundRepeat: "no-repeat",
-                }}
-              ></div> */}
               <div className="absolute inset-0 bg-black/10"></div>
 
               <div className="relative z-10 flex items-center gap-2 p-2">
@@ -194,7 +186,7 @@ const EvmPage = () => {
                     <span className="text-red-600 font-bold">
                       {banner.symbolName}
                     </span>{" "}
-                    या चिन्हासमोरील बटन दाबून{" "}
+                    या चिन्हासमोरील बटन दाबून <br />
                     <span className="text-indigo-600 font-bold">
                       {banner.candidateName}
                     </span>{" "}
