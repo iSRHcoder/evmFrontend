@@ -204,7 +204,7 @@ const EvmPage = () => {
           {/* DATE */}
           <div className="w-full text-xs bg-[#086cae] rounded-2xl mt-2">
             <p
-              className="text-white font-semibold text-[13px] p-2"
+              className="text-white font-semibold text-[13px] pt-2 pb-1"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
               मतदान दिनांक: 02 डिसेंबर 2025, वेळ: सकाळी 07:00 ते सायं. 05:30
