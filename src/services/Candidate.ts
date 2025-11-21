@@ -42,8 +42,6 @@ export type SingleCandidateResponse = ApiResponse<CandidateResponse>;
 export const createCandidate = async (
   candidate: CreateCandidateDto
 ): Promise<ApiResponse<CandidateResponse>> => {
-  console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
-
   try {
     const formData = new FormData();
     formData.append("candidateName", candidate.candidateName);
