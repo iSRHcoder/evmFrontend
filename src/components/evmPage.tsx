@@ -40,12 +40,6 @@ const EvmPage = () => {
 
   const banner = candidates[0];
 
-  if (!banner) {
-    return (
-      <div className="p-4 text-center text-gray-500">No candidates found</div>
-    );
-  }
-
   const handleVote = async (candidateId: string) => {
     const candidate = candidates.find((c) => c._id === candidateId);
     if (!candidate) return;
