@@ -8,11 +8,10 @@ import {
 
 const EvmPage = () => {
   const { id } = useParams(); // from /evm/:id
-  const storedVote = localStorage.getItem("hasVoted");
-  const [green, setGreen] = useState(false);
+  const [greenCandidate, setGreenCandidate] = useState<string | null>(null);
+  //const [green, setGreen] = useState(false);
   const [candidates, setCandidates] = useState<CandidateResponse[]>([]);
   const [loading, setLoading] = useState(true);
-  const [voted, setVoted] = useState<string | null>(storedVote);
   const [popupCandidate, setPopupCandidate] = useState<string | null>(null);
   const [showPoster, setShowPoster] = useState(() => {
     return !localStorage.getItem("posterShown");
@@ -48,45 +47,35 @@ const EvmPage = () => {
   }
 
   const handleVote = async (candidateId: string) => {
-    if (voted) return; // prevent revoting
-
     const candidate = candidates.find((c) => c._id === candidateId);
     if (!candidate) return;
 
     try {
-      // Increment votes on backend
       const newVotes = (candidate.votes ?? 0) + 1;
       const res = await updateCandidateVotes(candidateId, newVotes);
+
       if (!res.success) {
         console.error("Vote update failed:", res.message);
         return;
       }
 
-      // Mark as voted immediately
-      setVoted(candidateId);
-      setGreen(true);
-      localStorage.setItem("hasVoted", candidateId);
+      // Green light animation
+      setGreenCandidate(candidateId);
 
-      // Play vote sound immediately
       const audio = new Audio("/sounds/censor-beep.mp3");
-      audio.play().catch((err) => console.error("Audio play failed:", err));
+      audio.play().catch(() => {});
 
-      // Keep dot green for 3 seconds
       setTimeout(() => {
-        setGreen(false);
+        setGreenCandidate(null);
 
-        // Update state to reflect new votes
         setCandidates((prev) =>
           prev.map((c) =>
             c._id === candidateId ? { ...c, votes: newVotes } : c
           )
         );
 
-        // Show popup after dot turns red
         setPopupCandidate(candidate.candidateName);
-
-        // Auto-hide popup after 3.5 seconds
-        setTimeout(() => setPopupCandidate(null), 5000);
+        setTimeout(() => setPopupCandidate(null), 4000);
       }, 3000);
     } catch (err) {
       console.error("Vote error:", err);
@@ -275,17 +264,14 @@ const EvmPage = () => {
                         <div className="flex items-center justify-center gap-2">
                           <div
                             className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
-                              voted === c._id && green
+                              greenCandidate === c._id
                                 ? "bg-green-500"
                                 : "bg-red-500"
                             }`}
                           ></div>
                           <button
-                            disabled={voted !== null}
                             onClick={() => handleVote(c._id)}
-                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
-                              voted ? "bg-gray-400" : "bg-blue-600"
-                            }`}
+                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-sm `}
                           >
                             बटन
                           </button>
@@ -305,13 +291,6 @@ const EvmPage = () => {
             एकूण मते:{" "}
             {candidates.reduce((acc, cur) => acc + (cur.votes ?? 0), 0)}
           </div>
-
-          {voted && (
-            <p className="text-gray-400 text-[10px] p-2 italic">
-              तुम्ही या किंवा इतर कोणत्याही उमेदवाराला आधीच मतदान केले आहे,
-              त्यामुळे तुम्हाला पुन्हा मतदान करण्याची परवानगी नाही. धन्यवाद..!
-            </p>
-          )}
 
           {banner?.candidatePoster && (
             <button
