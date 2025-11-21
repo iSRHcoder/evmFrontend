@@ -126,14 +126,14 @@ const EvmPage = () => {
               ></div> */}
               <div className="absolute inset-0 bg-black/10"></div>
 
-              <div className="relative z-10 flex items-center gap-4 p-2">
+              <div className="relative z-10 flex items-center gap-2 p-2">
                 <img
                   src={banner.candidatePhoto}
                   alt="candidate"
                   className="w-22 h-28 sm:w-28 sm:h-35 object-cover rounded-lg shadow-lg border-2 border-white"
                 />
                 <div className="leading-snug">
-                  <div className=" text-white pt-2 pe-2 rounded-md sm:text-xs text-[10px] font-bold">
+                  <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
                     प्रभाग क्र.{" "}
                     <span className="text-red-600 font-bold">
                       {banner.wardNo}
