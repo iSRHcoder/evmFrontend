@@ -75,7 +75,7 @@ const EvmPage = () => {
         setPopupCandidate(candidate.candidateName);
 
         // Auto-hide popup after 3.5 seconds
-        setTimeout(() => setPopupCandidate(null), 3500);
+        setTimeout(() => setPopupCandidate(null), 5000);
       }, 3000);
     } catch (err) {
       console.error("Vote error:", err);
