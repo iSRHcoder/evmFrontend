@@ -126,7 +126,7 @@ const EvmPage = () => {
               ></div> */}
               <div className="absolute inset-0 bg-black/10"></div>
 
-              <div className="relative z-10 flex items-center gap-4 p-3">
+              <div className="relative z-10 flex items-center gap-4 p-2">
                 <img
                   src={banner.candidatePhoto}
                   alt="candidate"
