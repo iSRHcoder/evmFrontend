@@ -95,7 +95,7 @@ const EvmPage = () => {
   }
 
   // Build 10 fixed rows
-  const fixedRows = Array.from({ length: 10 }, (_, i) => {
+  const fixedRows = Array.from({ length: 11 }, (_, i) => {
     const serial = i + 1;
     return candidates.find((c) => Number(c.serialNo) === serial) || null;
   });
@@ -130,12 +130,12 @@ const EvmPage = () => {
                 <img
                   src={banner.candidatePhoto}
                   alt="candidate"
-                  className="w-22 h-28 sm:w-28 sm:h-35 object-cover rounded-lg shadow-lg border-2 border-white"
+                  className="w-22 h-28 sm:w-28 sm:h-35 object-cover rounded-lg shadow-lg border border-white"
                 />
                 <div className="leading-snug">
                   <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
                     प्रभाग क्र.{" "}
-                    <span className="text-red-600 font-bold">
+                    <span className="text-red-300 font-bold">
                       {banner.wardNo}
                     </span>{" "}
                     मधील{" "}
