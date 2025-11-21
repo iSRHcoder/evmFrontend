@@ -287,7 +287,7 @@ const EvmPage = () => {
                               voted ? "bg-gray-400" : "bg-blue-600"
                             }`}
                           >
-                            बटन दाबा
+                            बटन
                           </button>
                         </div>
                       ) : (
