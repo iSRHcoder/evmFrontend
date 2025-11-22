@@ -129,7 +129,7 @@ const EvmPage = () => {
             setShowPoster(false);
           }}
           className="
-    relative mt-2 mb-2 
+    relative mt-4 mb-2 
     bg-linear-to-r from-blue-600 to-blue-500
     text-white font-extrabold tracking-wide
     px-6 py-3 rounded-full shadow-2xl
