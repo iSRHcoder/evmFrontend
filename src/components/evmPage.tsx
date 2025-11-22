@@ -98,7 +98,7 @@ const EvmPage = () => {
         <img
           src={banner.candidatePoster}
           alt="poster"
-          className="w-full max-h-[85vh] mt-3  object-contain bg-black"
+          className="w-full max-h-[90vh] mt-3  object-contain bg-black"
         />
 
         <button
