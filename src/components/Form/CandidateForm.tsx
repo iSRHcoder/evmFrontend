@@ -13,7 +13,7 @@ export function CandidateForm() {
   const [wardNo, setWardNo] = useState("");
   const [candidatePhoto, setCandidatePhoto] = useState<File | null>(null);
   const [candidatePoster, setCandidatePoster] = useState<File | null>(null);
-
+  const [multipleVotes, setMultipleVotes] = useState(false);
   const [symbolImage, setSymbolImage] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,6 +37,7 @@ export function CandidateForm() {
       serialNo: Number(serialNo),
       wardNo,
       candidatePhoto,
+      multipleVotes,
       candidatePoster: candidatePoster!,
       symbolImage,
     };
@@ -52,6 +53,7 @@ export function CandidateForm() {
       setSerialNo("");
       setCandidatePhoto(null);
       setCandidatePoster(null);
+      setMultipleVotes(false);
       setWardNo("");
       setSymbolImage(null);
     } else {
@@ -87,6 +89,16 @@ export function CandidateForm() {
             placeholder="Enter symbol name"
             value={symbolName}
             onChange={(e) => setSymbolName(e.target.value)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="font-medium text-gray-700">Multiple Votes</label>
+          <input
+            type="checkbox"
+            className="h-5 w-5"
+            checked={multipleVotes}
+            onChange={(e) => setMultipleVotes(e.target.checked)}
           />
         </div>
 

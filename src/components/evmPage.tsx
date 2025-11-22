@@ -16,6 +16,7 @@ const EvmPage = () => {
   const [showPoster, setShowPoster] = useState(() => {
     return !localStorage.getItem("posterShown");
   });
+  const [voted, setVoted] = useState(false);
 
   useEffect(() => {
     const loadCandidates = async () => {
@@ -41,6 +42,21 @@ const EvmPage = () => {
   const banner = candidates[0];
 
   const handleVote = async (candidateId: string) => {
+    if (!banner) return;
+
+    const voteKey = `hasVoted_${banner._id}`;
+    const isMultiple = banner.multipleVotes;
+
+    // 1️⃣ Restrict voting if SINGLE-VOTE mode
+    if (!isMultiple) {
+      const alreadyVoted = localStorage.getItem(voteKey);
+
+      if (alreadyVoted) {
+        setVoted(true);
+        return;
+      }
+    }
+
     const candidate = candidates.find((c) => c._id === candidateId);
     if (!candidate) return;
 
@@ -53,7 +69,13 @@ const EvmPage = () => {
         return;
       }
 
-      // Green light animation
+      // 2️⃣ Store vote ONLY in single-vote mode
+      if (!isMultiple) {
+        localStorage.setItem(voteKey, "true");
+        setVoted(true);
+      }
+
+      // 3️⃣ UI green light
       setGreenCandidate(candidateId);
 
       const audio = new Audio("/sounds/censor-beep.mp3");
@@ -131,7 +153,10 @@ const EvmPage = () => {
       {candidates.length === 0 ? (
         <div className="p-4 text-center text-gray-500">No candidates found</div>
       ) : (
-        <div className="w-full p-2 mx-auto bg-white shadow rounded-md overflow-hidden">
+        <div
+          className="w-full p-2 mx-auto bg-white shadow rounded-md overflow-hidden"
+          onClick={() => setPopupCandidate(null)}
+        >
           {/* HEADER & MAIN BANNER */}
           <div className="w-full bg-[#086cae] text-white p-2 rounded-lg overflow-hidden">
             <div
@@ -264,7 +289,11 @@ const EvmPage = () => {
                           ></div>
                           <button
                             onClick={() => handleVote(c._id)}
-                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-sm`}
+                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                              !banner.multipleVotes && voted
+                                ? ` bg-gray-400`
+                                : `bg-blue-600`
+                            }`}
                           >
                             बटन
                           </button>
@@ -284,6 +313,15 @@ const EvmPage = () => {
             एकूण मते:{" "}
             {candidates.reduce((acc, cur) => acc + (cur.votes ?? 0), 0)}
           </div>
+
+          {voted && (
+            <div className="mt-2 mb-2 p-2 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-red-600 text-[11px] italic animate-pulse">
+                तुम्ही या किंवा इतर कोणत्याही उमेदवाराला आधीच मतदान केले आहे,
+                त्यामुळे तुम्हाला पुन्हा मतदान करण्याची परवानगी नाही. धन्यवाद..!
+              </p>
+            </div>
+          )}
 
           {banner?.candidatePoster && (
             <button

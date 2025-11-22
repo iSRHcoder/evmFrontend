@@ -7,6 +7,7 @@ export interface CreateCandidateDto {
   constituency: string;
   serialNo: number;
   party: string;
+  multipleVotes: boolean;
   wardNo: string;
   candidatePhoto: File; // file from input
   candidatePoster?: File | null;
@@ -22,6 +23,7 @@ export interface CandidateResponse {
   electionDate?: string;
   serialNo: string;
   party: string;
+  multipleVotes: boolean;
   wardNo: string;
   candidatePhoto: string; // URL
   symbolImage: string; // URL
@@ -49,6 +51,11 @@ export const createCandidate = async (
     formData.append("constituency", candidate.constituency);
     formData.append("serialNo", String(candidate.serialNo));
     formData.append("party", candidate.party);
+    formData.append(
+      "multipleVotes",
+      candidate.multipleVotes ? "true" : "false"
+    );
+
     formData.append("wardNo", candidate.wardNo);
     formData.append("candidatePhoto", candidate.candidatePhoto);
     if (candidate.candidatePoster) {
