@@ -4,8 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/evmFrontend/", // IMPORTANT: repo name here
+  base: "/", // correct for Cloudflare
   build: {
-    outDir: "docs",
+    outDir: "dist", // Cloudflare uses /dist
   },
 });
