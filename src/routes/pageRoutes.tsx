@@ -8,7 +8,7 @@ const PageRoute: React.FC = () => {
     <Router>
       <Routes>
         {/* Valid route → EVM Voting Page */}
-        <Route path="/evm/:id" element={<EvmPage />} />
+        <Route path="/:id" element={<EvmPage />} />
 
         {/* Secret admin form page */}
         <Route path="/qwerty-evm" element={<CandidateForm />} />
