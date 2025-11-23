@@ -207,8 +207,7 @@ const EvmPage = () => {
                       className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
                       style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
                     >
-                      {/* {banner.candidateName} */}
-                      श्री. रामेश्वर अशोकराव वाडेटीवार
+                      {banner.candidateName}
                     </h1>
                   </div>
                   <p className="text-white font-semibold sm:text-xs text-[10px]">
