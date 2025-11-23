@@ -185,7 +185,7 @@ const EvmPage = () => {
                       मधील{" "}
                       {banner.party !== "no" ? (
                         <span>
-                          <span className="text-orange-600 font-bold">
+                          <span className="text-sky-300 font-bold">
                             {banner.party}
                           </span>
                           चे/च्या अधिकृत उमेदवार
@@ -207,7 +207,8 @@ const EvmPage = () => {
                       className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
                       style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
                     >
-                      {banner.candidateName}
+                      {/* {banner.candidateName} */}
+                      श्री. रामेश्वर अशोकराव वाडेटीवार
                     </h1>
                   </div>
                   <p className="text-white font-semibold sm:text-xs text-[10px]">
