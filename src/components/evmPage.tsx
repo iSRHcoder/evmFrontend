@@ -176,23 +176,32 @@ const EvmPage = () => {
                   className="w-22 h-28 sm:w-28 sm:h-35 object-fill rounded-lg shadow-lg border border-white"
                 />
                 <div className="leading-snug">
-                  <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
-                    प्रभाग क्र.{" "}
-                    <span className="text-red-300 font-bold">
-                      {banner.wardNo}
-                    </span>{" "}
-                    मधील{" "}
-                    {banner.party !== "no" ? (
-                      <span>
-                        <span className="text-green-400 font-bold">
-                          {banner.party}
-                        </span>{" "}
-                        चे अधिकृत उमेदवार
+                  {banner.wardNo !== "no" ? (
+                    <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
+                      प्रभाग क्र.{" "}
+                      <span className="text-red-300 font-bold">
+                        {banner.wardNo}
+                      </span>{" "}
+                      मधील{" "}
+                      {banner.party !== "no" ? (
+                        <span>
+                          <span className="text-orange-600 font-bold">
+                            {banner.party}
+                          </span>
+                          चे/च्या अधिकृत उमेदवार
+                        </span>
+                      ) : (
+                        <span>अपक्ष उमेदवार</span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
+                      <span className="text-orange-600 font-bold">
+                        {banner.party}
                       </span>
-                    ) : (
-                      <span>अपक्ष उमेदवार</span>
-                    )}
-                  </div>
+                      <span>चे/च्या नगराध्यक्ष पदाचे अधिकृत उमेदवार</span>
+                    </div>
+                  )}
                   <div className="flex flex-col xs:flex-row justify-around items-center gap-1">
                     <h1
                       className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
