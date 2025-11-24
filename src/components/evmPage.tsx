@@ -105,7 +105,9 @@ const EvmPage = () => {
 
   if (!banner) {
     return (
-      <div className="p-4 text-center text-gray-500">No candidates found</div>
+      <div className="p-4 text-center text-gray-500">
+        उमेदवार नाही / No candidates found
+      </div>
     );
   }
 
@@ -152,7 +154,9 @@ const EvmPage = () => {
   return (
     <>
       {candidates.length === 0 ? (
-        <div className="p-4 text-center text-gray-500">No candidates found</div>
+        <div className="p-4 text-center text-gray-500">
+          उमेदवार नाही / No candidates found
+        </div>
       ) : (
         <div
           className="w-full p-2 mx-auto bg-white shadow rounded-md overflow-hidden"

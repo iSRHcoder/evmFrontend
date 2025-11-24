@@ -89,27 +89,6 @@ export const createCandidate = async (
   }
 };
 
-export const getAllCandidates = async (): Promise<CandidateListResponse> => {
-  try {
-    const response = await api.get<CandidateListResponse>("/api/candidates");
-    return response.data;
-  } catch (error) {
-    console.error("Get all candidates error:", error);
-
-    if (axios.isAxiosError(error)) {
-      return {
-        success: false,
-        message: error.response?.data?.message || "Failed to fetch candidates",
-      };
-    }
-
-    return {
-      success: false,
-      message: "Unknown error occurred",
-    };
-  }
-};
-
 export const getCandidateById = async (
   id: string
 ): Promise<SingleCandidateResponse> => {
@@ -153,6 +132,27 @@ export const updateCandidateVotes = async (
       return {
         success: false,
         message: error.response?.data?.message || "Failed to update votes",
+      };
+    }
+
+    return {
+      success: false,
+      message: "Unknown error occurred",
+    };
+  }
+};
+
+export const getAllCandidates = async (): Promise<CandidateListResponse> => {
+  try {
+    const response = await api.get<CandidateListResponse>("/api/candidates");
+    return response.data;
+  } catch (error) {
+    console.error("Get all candidates error:", error);
+
+    if (axios.isAxiosError(error)) {
+      return {
+        success: false,
+        message: error.response?.data?.message || "Failed to fetch candidates",
       };
     }
 
