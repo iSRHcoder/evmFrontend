@@ -98,7 +98,8 @@ const EvmPage = () => {
     }
   };
 
-  if (loading) return <div className="p-4 text-center">Loading...</div>;
+  if (loading)
+    return <div className="p-4 text-center">कृपया प्रतीक्षा करा...</div>;
   if (!id)
     return <div className="p-4 text-center text-xl">Invalid Link ❌</div>;
 
@@ -169,23 +170,23 @@ const EvmPage = () => {
             <div className="relative mt-2 rounded-lg overflow-hidden">
               <div className="absolute inset-0 bg-black/10"></div>
 
-              <div className="relative z-10 flex items-center justify-center gap-2 p-2">
+              <div className="relative z-10 flex items-center justify-center gap-3 p-2">
                 <img
                   src={banner.candidatePhoto}
                   alt="candidate"
-                  className="w-22 h-28 sm:w-28 sm:h-35 object-fill rounded-lg shadow-lg border border-white"
+                  className="w-22 h-28 sm:w-28 sm:h-35 object-fill rounded-lg shadow-lg border -ms-2 border-white"
                 />
                 <div className="leading-snug">
                   {banner.wardNo !== "no" ? (
                     <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
                       प्रभाग क्र.{" "}
-                      <span className="text-red-300 font-bold">
+                      <span className="text-green-400 font-bold">
                         {banner.wardNo}
                       </span>{" "}
                       मधील{" "}
                       {banner.party !== "no" ? (
                         <span>
-                          <span className="text-sky-300 font-bold">
+                          <span className="text-red-300 font-bold">
                             {banner.party}
                           </span>
                           चे/च्या अधिकृत उमेदवार
@@ -202,7 +203,7 @@ const EvmPage = () => {
                       <span>चे/च्या नगराध्यक्ष पदाचे अधिकृत उमेदवार</span>
                     </div>
                   )}
-                  <div className="flex flex-col xs:flex-row justify-around items-center gap-1">
+                  <div className="flex flex-col xs:flex-row justify-around items-center">
                     <h1
                       className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
                       style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
