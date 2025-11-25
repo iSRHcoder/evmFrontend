@@ -176,187 +176,199 @@ const PanelEvmPage = () => {
 
   return (
     <div className="w-full p-2 mx-auto bg-white shadow rounded-md overflow-hidden">
-      {/* HEADER & MAIN BANNER */}
-      <div className="w-full bg-[#086cae] text-white p-2 rounded-lg overflow-hidden">
-        <div
-          className="bg-white sm:text-lg text-[15px] text-black font-bold text-center pt-2 rounded-md shadow"
-          style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
-        >
-          {panel.constituency} नगरपालिका सार्वत्रिक निवडणूक 2025
-        </div>
-        <p className="text-center font-bold text-sm bg-indigo-500 p-1 mt-1 rounded-md">
-          {[
-            panel.candidateAdhyakshParty?.trim(),
-            panel.candidateAParty?.trim(),
-            panel.candidateBParty?.trim(),
-          ]
-            .filter(
-              (p, i, arr) =>
-                p &&
-                arr.findIndex((x) => x?.toLowerCase() === p.toLowerCase()) === i
-            ) // remove duplicates ignoring case & empty
-            .join(" / ")}{" "}
-          नगरअध्यक्ष पदाचे अधिकृत उमेदवार
-        </p>
+      <div
+        className=" border-2 border-amber-50 sm:text-lg text-[15px] bg-[#086cae] text-white  font-bold text-center pt-2 rounded-xl shadow"
+        style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+      >
+        {panel.constituency} नगरपालिका सार्वत्रिक निवडणूक 2025
+      </div>
 
-        <div className="relative mt-2 rounded-lg overflow-hidden">
-          <div className="absolute inset-0 bg-black/10"></div>
+      {panel.candidateAdhyakshName !== "no" && (
+        <>
+          <div className="w-full bg-[#086cae] text-white p-2 rounded-lg overflow-hidden">
+            <p
+              className="text-center font-bold text-sm bg-white p-1 mt-1 text-indigo-600 rounded-md"
+              style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+            >
+              {[
+                panel.candidateAdhyakshParty?.trim(),
+                panel.candidateAParty?.trim(),
+                panel.candidateBParty?.trim(),
+              ]
+                .filter(
+                  (p, i, arr) =>
+                    p &&
+                    arr.findIndex(
+                      (x) => x?.toLowerCase() === p.toLowerCase()
+                    ) === i
+                ) // remove duplicates ignoring case & empty
+                .join(" / ")}{" "}
+              नगरअध्यक्ष पदाचे अधिकृत उमेदवार
+            </p>
 
-          <div className="relative z-10 flex items-center justify-center gap-3 p-2">
-            <img
-              src={panel.candidateAdhyakshPhoto}
-              alt="adhyaksh"
-              className="w-22 h-28 sm:w-28 sm:h-35 object-fill rounded-lg shadow-lg border  border-white"
-            />
-            <div className="leading-snug">
-              <div className="flex flex-col xs:flex-row justify-around items-center">
-                <h1
-                  className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
-                  style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
-                >
-                  {panel.candidateAdhyakshName}
-                </h1>
-              </div>
-              <p className="text-white font-semibold sm:text-xs text-[10px]">
-                डमी मतदान करण्यासाठी{" "}
-                <span className="text-green-400 ">
-                  {panel.candidateAdhyakshSymbolName}
-                </span>{" "}
-                या चिन्हासमोरील निळे बटन दाबावे.
-              </p>
+            <div className="relative mt-2 rounded-lg overflow-hidden">
+              <div className="absolute inset-0 bg-black/10"></div>
 
-              <div className="bg-white text-black p-1 mt-2 rounded-md sm:text-xs text-[10px] font-semibold shadow">
-                मतदानाच्या दिवशीसुद्धा{" "}
-                <span className="text-red-600 font-bold">
-                  {panel.candidateAdhyakshSymbolName}
-                </span>{" "}
-                या चिन्हासमोरील{" "}
-                <span className="text-red-600 font-bold">
-                  {panel.candidateAdhyakshSerialNo}
-                </span>{" "}
-                नंबरचे बटन दाबून <br />
-                <span className="text-indigo-600 font-bold">
-                  {panel.candidateAdhyakshName}
-                </span>{" "}
-                यांना प्रचंड बहूमतांनी विजयी करा.
+              <div className="relative z-10 flex items-center justify-center gap-3 p-2">
+                <img
+                  src={panel.candidateAdhyakshPhoto}
+                  alt="adhyaksh"
+                  className="w-22 h-28 sm:w-28 sm:h-35 object-fill rounded-lg shadow-lg border  border-white"
+                />
+                <div className="leading-snug">
+                  <div className="flex flex-col xs:flex-row justify-around items-center">
+                    <h1
+                      className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
+                      style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+                    >
+                      {panel.candidateAdhyakshName}
+                    </h1>
+                  </div>
+                  <p className="text-white font-semibold sm:text-xs text-[10px]">
+                    डमी मतदान करण्यासाठी{" "}
+                    <span className="text-green-400 ">
+                      {panel.candidateAdhyakshSymbolName}
+                    </span>{" "}
+                    या चिन्हासमोरील निळे बटन दाबावे.
+                  </p>
+
+                  <div className="bg-white text-black p-1 mt-2 rounded-md sm:text-xs text-[10px] font-semibold shadow">
+                    मतदानाच्या दिवशीसुद्धा{" "}
+                    <span className="text-red-600 font-bold">
+                      {panel.candidateAdhyakshSymbolName}
+                    </span>{" "}
+                    या चिन्हासमोरील{" "}
+                    <span className="text-red-600 font-bold">
+                      {panel.candidateAdhyakshSerialNo}
+                    </span>{" "}
+                    नंबरचे बटन दाबून <br />
+                    <span className="text-indigo-600 font-bold">
+                      {panel.candidateAdhyakshName}
+                    </span>{" "}
+                    यांना प्रचंड बहूमतांनी विजयी करा.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* ===================== */}
-      {/*   ADHYAKSH EVM TABLE  */}
-      {/* ===================== */}
-      <div className="mt-3 ">
-        <div className="mt-2 overflow-x-auto rounded-t-md">
-          <table className="min-w-full border text-[10px] sm:text-sm">
-            <thead className="bg-[#086cae] text-white font-semibold">
-              <tr>
-                <th className="border border-gray-300 p-2 w-12 text-center">
-                  अ.क्र.
-                </th>
-                <th className="border border-gray-300 p-2 w-48">
-                  उमेदवाराचे नाव
-                </th>
-                <th className="border border-gray-300 p-2 text-center w-20">
-                  चिन्ह
-                </th>
-                <th className="border border-gray-300 p-2 text-center w-20">
-                  मत
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {startSerial > 1 && (
-                <tr>
-                  <td colSpan={4} className="text-center text-gray-400">
-                    ...
-                  </td>
-                </tr>
-              )}
-
-              {adhyakshRows.map((row, idx) => (
-                <tr key={idx} className="border border-gray-300">
-                  <td
-                    className={`border border-gray-300 p-2 text-center font-semibold ${
-                      row ? "text-2xl" : "text-xs"
-                    }`}
-                  >
-                    {startSerial + idx}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {row ? (
-                      <span
-                        className="truncate font-bold text-lg"
-                        style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
-                      >
-                        {row.candidateAdhyakshName}
-                      </span>
-                    ) : (
-                      <span className="text-gray-400 italic">—</span>
+          <div className="mt-3 ">
+            <div className="mt-2 overflow-x-auto rounded-t-md">
+              <table className="min-w-full border text-[10px] sm:text-sm">
+                <thead className="bg-[#086cae] text-white font-semibold">
+                  <tr>
+                    {Number(panel.candidateAdhyakshSerialNo) > 0 && (
+                      <th className="border border-gray-300 p-2 w-12 text-center">
+                        अ.क्र.
+                      </th>
                     )}
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    {row ? (
-                      <img
-                        src={row.candidateAdhyakshSymbolImage}
-                        alt="symbol"
-                        className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
-                      />
-                    ) : (
-                      <span className="text-gray-400">—</span>
-                    )}
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    {row ? (
-                      <div className="flex items-center justify-center gap-2">
-                        <div
-                          className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
-                            greenLight === "candidateAdhyakshVotes"
-                              ? "bg-green-500"
-                              : "bg-red-500"
-                          }`}
-                        ></div>
-                        <button
-                          onClick={() => handleVote("candidateAdhyakshVotes")}
-                          className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
-                            !panel.multipleVotes &&
-                            localStorage.getItem(
-                              `panelVote_${panel._id}_candidateAdhyakshVotes`
-                            )
-                              ? ` bg-gray-400`
-                              : `bg-blue-600`
+                    <th className="border border-gray-300 p-2 w-48">
+                      उमेदवाराचे नाव
+                    </th>
+                    <th className="border border-gray-300 p-2 text-center w-20">
+                      चिन्ह
+                    </th>
+                    <th className="border border-gray-300 p-2 text-center w-20">
+                      मत
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {startSerial > 1 && (
+                    <tr>
+                      <td colSpan={4} className="text-center text-gray-400">
+                        ...
+                      </td>
+                    </tr>
+                  )}
+
+                  {adhyakshRows.map((row, idx) => (
+                    <tr key={idx} className="border border-gray-300">
+                      {Number(panel.candidateAdhyakshSerialNo) > 0 && (
+                        <td
+                          className={`border border-gray-300 p-2 text-center font-semibold ${
+                            row ? "text-2xl" : "text-xs"
                           }`}
                         >
-                          बटन
-                        </button>
-                      </div>
-                    ) : (
-                      <span className="text-gray-400">—</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                          {startSerial + idx}
+                        </td>
+                      )}
+                      <td className="border border-gray-300 p-2">
+                        {row ? (
+                          <span
+                            className="truncate font-bold text-lg"
+                            style={{
+                              fontFamily: "'Anek Devanagari', sans-serif",
+                            }}
+                          >
+                            {row.candidateAdhyakshName}
+                          </span>
+                        ) : (
+                          <span className="text-gray-400 italic">—</span>
+                        )}
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        {row ? (
+                          <img
+                            src={row.candidateAdhyakshSymbolImage}
+                            alt="symbol"
+                            className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                          />
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        {row ? (
+                          <div className="flex items-center justify-center gap-2">
+                            <div
+                              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                                greenLight === "candidateAdhyakshVotes"
+                                  ? "bg-green-500"
+                                  : "bg-red-500"
+                              }`}
+                            ></div>
+                            <button
+                              onClick={() =>
+                                handleVote("candidateAdhyakshVotes")
+                              }
+                              className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                                !panel.multipleVotes &&
+                                localStorage.getItem(
+                                  `panelVote_${panel._id}_candidateAdhyakshVotes`
+                                )
+                                  ? ` bg-gray-400`
+                                  : `bg-blue-600`
+                              }`}
+                            >
+                              बटन
+                            </button>
+                          </div>
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
 
-              {endSerial < totalCandidates && (
-                <tr>
-                  <td colSpan={4} className="text-center text-gray-400">
-                    ...
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="font-bold rounded-b mb-2 bg-amber-300 text-blue-700 text-sm">
-        <span className="text-black">
-          {panel?.candidateAdhyakshName} यांना एकूण मत:
-        </span>{" "}
-        {panel?.candidateAdhyakshVotes ?? 0}
-      </div>
+                  {endSerial < totalCandidates && (
+                    <tr>
+                      <td colSpan={4} className="text-center text-gray-400">
+                        ...
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="font-bold rounded-b mb-2 bg-amber-200 p-2 text-blue-700 text-sm">
+            <span className="text-black">
+              {panel?.candidateAdhyakshName} यांना एकूण मत:
+            </span>{" "}
+            {panel?.candidateAdhyakshVotes ?? 0}
+          </div>
+        </>
+      )}
 
       <hr />
 
@@ -404,7 +416,7 @@ const PanelEvmPage = () => {
             </div>
 
             <h1
-              className="text-[20px] sm:text-[26px] pt-3 font-extrabold text-yellow-300 leading-tight"
+              className="text-[20px] sm:text-[26px] pt-3 font-extrabold text-indigo-600 leading-tight"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
               {panel.candidateAName}
@@ -426,9 +438,11 @@ const PanelEvmPage = () => {
         <table className="min-w-full border text-[10px] sm:text-sm">
           <thead className="bg-[#086cae] text-white font-semibold">
             <tr>
-              <th className="border border-gray-300 p-2 w-12 text-center">
-                अ.क्र.
-              </th>
+              {Number(panel.candidateASerialNo) > 0 && (
+                <th className="border border-gray-300 p-2 w-12 text-center">
+                  अ.क्र.
+                </th>
+              )}
               <th className="border border-gray-300 p-2 w-48">
                 उमेदवाराचे नाव
               </th>
@@ -442,9 +456,11 @@ const PanelEvmPage = () => {
           </thead>
           <tbody>
             <tr className="border border-gray-300">
-              <td className="border border-gray-300 p-2 text-2xl text-center font-semibold">
-                {panel.candidateASerialNo}
-              </td>
+              {Number(panel.candidateASerialNo) > 0 && (
+                <td className="border border-gray-300 p-2 text-2xl text-center font-semibold">
+                  {panel.candidateASerialNo}
+                </td>
+              )}
               <td
                 className="border border-gray-300 text-lg p-2 font-bold"
                 style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
@@ -528,7 +544,7 @@ const PanelEvmPage = () => {
             </div>
 
             <h1
-              className="text-[20px] sm:text-[26px] pt-3 font-extrabold text-yellow-300 leading-tight"
+              className="text-[20px] sm:text-[26px] pt-3 font-extrabold text-indigo-600 leading-tight"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
               {panel.candidateBName}
@@ -550,9 +566,11 @@ const PanelEvmPage = () => {
         <table className="min-w-full border text-[10px] sm:text-sm">
           <thead className="bg-[#086cae] text-white font-semibold">
             <tr>
-              <th className="border border-gray-300 p-2 w-12 text-center">
-                अ.क्र.
-              </th>
+              {Number(panel.candidateBSerialNo) > 0 && (
+                <th className="border border-gray-300 p-2 w-12 text-center">
+                  अ.क्र.
+                </th>
+              )}
               <th className="border border-gray-300 p-2 w-48">
                 उमेदवाराचे नाव
               </th>
@@ -566,9 +584,11 @@ const PanelEvmPage = () => {
           </thead>
           <tbody>
             <tr className="border border-gray-300">
-              <td className="border border-gray-300 p-2 text-center text-2xl font-semibold">
-                {panel.candidateBSerialNo}
-              </td>
+              {Number(panel.candidateBSerialNo) > 0 && (
+                <td className="border border-gray-300 p-2 text-center text-2xl font-semibold">
+                  {panel.candidateBSerialNo}
+                </td>
+              )}
               <td
                 className="border border-gray-300 text-lg p-2 font-bold"
                 style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
