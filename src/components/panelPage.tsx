@@ -287,7 +287,10 @@ const PanelEvmPage = () => {
                   </td>
                   <td className="border border-gray-300 p-2">
                     {row ? (
-                      <span className="truncate font-bold text-sm">
+                      <span
+                        className="truncate font-bold text-lg"
+                        style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+                      >
                         {row.candidateAdhyakshName}
                       </span>
                     ) : (
@@ -442,7 +445,10 @@ const PanelEvmPage = () => {
               <td className="border border-gray-300 p-2 text-2xl text-center font-semibold">
                 {panel.candidateASerialNo}
               </td>
-              <td className="border border-gray-300 text-lg p-2 font-bold">
+              <td
+                className="border border-gray-300 text-lg p-2 font-bold"
+                style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+              >
                 {panel.candidateAName}
               </td>
               <td className="border border-gray-300 p-2 text-center">
@@ -563,7 +569,10 @@ const PanelEvmPage = () => {
               <td className="border border-gray-300 p-2 text-center text-2xl font-semibold">
                 {panel.candidateBSerialNo}
               </td>
-              <td className="border border-gray-300 text-lg p-2 font-bold">
+              <td
+                className="border border-gray-300 text-lg p-2 font-bold"
+                style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+              >
                 {panel.candidateBName}
               </td>
               <td className="border border-gray-300 p-2 text-center">
