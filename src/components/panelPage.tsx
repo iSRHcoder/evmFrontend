@@ -408,7 +408,7 @@ const PanelEvmPage = () => {
       {/*   CANDIDATE A TABLE  */}
       {/* ===================== */}
       <div className="relative mt-2 rounded-lg overflow-hidden">
-        <div className="relative z-10 flex items-center justify-center bg-linear-to-r from-purple-600 via-pink-500 to-red-500 gap-3 p-3 rounded-lg shadow-xl">
+        <div className="relative z-10 flex items-center justify-center bg-linear-to-r from-purple-500 via-pink-400 to-red-400 gap-3 p-3 rounded-lg shadow-xl">
           <img
             src={panel.candidateAPhoto}
             alt="candidate A"
@@ -536,7 +536,7 @@ const PanelEvmPage = () => {
       {/*   CANDIDATE B TABLE  */}
       {/* ===================== */}
       <div className="relative mt-2 rounded-lg overflow-hidden">
-        <div className="relative z-10 flex items-center justify-center bg-linear-to-r from-purple-600 via-pink-500 to-red-500 gap-3 p-3 rounded-lg shadow-xl">
+        <div className="relative z-10 flex items-center justify-center bg-linear-to-r from-purple-500 via-pink-400 to-red-400 gap-3 p-3 rounded-lg shadow-xl">
           <img
             src={panel.candidateBPhoto}
             alt="candidate B"
