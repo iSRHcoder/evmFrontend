@@ -247,13 +247,15 @@ const EvmPage = () => {
           </div>
 
           {/* EVM TABLE */}
-          <div className="mt-2 overflow-x-auto rounded-t-md">
+          <div className="mt-3 overflow-x-auto rounded-t-md">
             <table className="min-w-full border text-[10px] sm:text-sm">
               <thead className="bg-[#086cae] text-white font-semibold">
                 <tr>
-                  <th className="border border-gray-300 p-2 w-12 text-center">
-                    अ.क्र.
-                  </th>
+                  {Number(banner.serialNo) > 0 && (
+                    <th className="border border-gray-300 p-2 w-12 text-center">
+                      अ.क्र.
+                    </th>
+                  )}
                   <th className="border border-gray-300 p-2 w-48">
                     उमेदवाराचे नाव
                   </th>
@@ -265,59 +267,108 @@ const EvmPage = () => {
                   </th>
                 </tr>
               </thead>
+
               <tbody>
-                {fixedRows.map((c, idx) => (
-                  <tr key={idx} className="border border-gray-300">
-                    <td className="border border-gray-300 p-2 text-center font-semibold">
-                      {idx + 1}
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      {c ? (
-                        <span className="truncate font-bold text-sm">
-                          {c.candidateName}
-                        </span>
-                      ) : (
-                        <span className="text-gray-400 italic">—</span>
-                      )}
-                    </td>
-                    <td className="border border-gray-300 p-2 text-center">
-                      {c ? (
-                        <img
-                          src={c.symbolImage}
-                          alt="symbol"
-                          className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
-                        />
-                      ) : (
-                        <span className="text-gray-400">—</span>
-                      )}
-                    </td>
-                    <td className="border border-gray-300 p-2 text-center">
-                      {c ? (
-                        <div className="flex items-center justify-center gap-2">
-                          <div
-                            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
-                              greenCandidate === c._id
-                                ? "bg-green-500"
-                                : "bg-red-500"
-                            }`}
-                          ></div>
-                          <button
-                            onClick={() => handleVote(c._id)}
-                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
-                              !banner.multipleVotes && voted
-                                ? ` bg-gray-400`
-                                : `bg-blue-600`
-                            }`}
+                {Number(banner.serialNo) > 0 ? (
+                  // Serial numbers exist → show all fixedRows
+                  fixedRows.map((c, idx) => (
+                    <tr key={idx} className="border border-gray-300">
+                      <td className="border border-gray-300 p-2 text-center font-semibold">
+                        {c ? idx + 1 : "—"}
+                      </td>
+                      <td className="border border-gray-300 p-2 ">
+                        {c ? (
+                          <span
+                            className="truncate font-bold text-lg"
+                            style={{
+                              fontFamily: "'Anek Devanagari', sans-serif",
+                            }}
                           >
-                            बटन
-                          </button>
-                        </div>
-                      ) : (
-                        <span className="text-gray-400">—</span>
-                      )}
+                            {c.candidateName}
+                          </span>
+                        ) : (
+                          <span className="text-gray-400 italic">—</span>
+                        )}
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        {c ? (
+                          <img
+                            src={c.symbolImage}
+                            alt="symbol"
+                            className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                          />
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        {c && (
+                          <div className="flex items-center justify-center gap-2">
+                            <div
+                              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                                greenCandidate === c._id
+                                  ? "bg-green-500"
+                                  : "bg-red-500"
+                              }`}
+                            ></div>
+                            <button
+                              onClick={() => handleVote(c._id)}
+                              className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                                !banner.multipleVotes && voted
+                                  ? "bg-gray-400 cursor-not-allowed"
+                                  : "bg-blue-600"
+                              }`}
+                              disabled={!banner.multipleVotes && voted}
+                            >
+                              बटन
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  // No serial number → show only banner candidate row
+                  <tr className="border border-gray-300">
+                    <td className="border border-gray-300 p-2">
+                      <span
+                        className="truncate font-bold text-lg"
+                        style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+                      >
+                        {banner.candidateName}
+                      </span>
+                    </td>
+                    <td className="border border-gray-300 p-2 text-center">
+                      <img
+                        src={banner.symbolImage}
+                        alt="symbol"
+                        className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                      />
+                    </td>
+                    <td className="border border-gray-300 p-2 text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <div
+                          className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                            greenCandidate === banner._id
+                              ? "bg-green-500"
+                              : "bg-red-500"
+                          }`}
+                        ></div>
+                        <button
+                          onClick={() => handleVote(banner._id)}
+                          className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                            !banner.multipleVotes && voted
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "bg-blue-600"
+                          }`}
+                          disabled={!banner.multipleVotes && voted}
+                        >
+                          बटन
+                        </button>
+                      </div>
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
