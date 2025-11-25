@@ -104,10 +104,21 @@ const PanelEvmPage = () => {
       // ✅ Only show popup if all three votes pressed
       setTimeout(() => {
         setGreenLight(null);
-        const allPressed = Object.values({
-          ...votesPressed,
-          [key]: true,
-        }).every(Boolean);
+        let allPressed = false;
+
+        if (panel.candidateAdhyakshName === "no") {
+          const pressedA =
+            key === "candidateAVotes" ? true : votesPressed.candidateAVotes;
+          const pressedB =
+            key === "candidateBVotes" ? true : votesPressed.candidateBVotes;
+
+          allPressed = pressedA && pressedB;
+        } else {
+          allPressed = Object.values({
+            ...votesPressed,
+            [key]: true,
+          }).every(Boolean);
+        }
 
         if (allPressed) {
           setPopupMsg("आपले मतदान नोंदवले गेले आहे 🙏");
