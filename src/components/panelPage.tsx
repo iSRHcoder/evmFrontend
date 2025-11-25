@@ -160,7 +160,7 @@ const PanelEvmPage = () => {
   // DYNAMIC Adhyaksh Rows
   // -----------------------------
   // const adhyakshSerial = panel.candidateAdhyakshSerialNo;
-  // const totalCandidates = 20; // total candidates
+  // const totalCandidates = 20; // total candidates zzzzz
 
   // const startSerial = Math.max(1, adhyakshSerial - 3);
   // const endSerial = Math.min(totalCandidates, adhyakshSerial + 3);
