@@ -159,20 +159,20 @@ const PanelEvmPage = () => {
   // -----------------------------
   // DYNAMIC Adhyaksh Rows
   // -----------------------------
-  const adhyakshSerial = panel.candidateAdhyakshSerialNo;
-  const totalCandidates = 20; // total candidates
+  // const adhyakshSerial = panel.candidateAdhyakshSerialNo;
+  // const totalCandidates = 20; // total candidates zzzzz
 
-  const startSerial = Math.max(1, adhyakshSerial - 3);
-  const endSerial = Math.min(totalCandidates, adhyakshSerial + 3);
+  // const startSerial = Math.max(1, adhyakshSerial - 3);
+  // const endSerial = Math.min(totalCandidates, adhyakshSerial + 3);
 
   // Build rows array
-  const adhyakshRows = Array.from(
-    { length: endSerial - startSerial + 1 },
-    (_, i) => {
-      const serial = startSerial + i;
-      return serial === adhyakshSerial ? panel : null;
-    }
-  );
+  //   const adhyakshRows = Array.from(
+  //     { length: endSerial - startSerial + 1 },
+  //     (_, i) => {
+  //       const serial = startSerial + i;
+  //       return serial === adhyakshSerial ? panel : null;
+  //     }
+  //   );
 
   return (
     <div className="w-full p-2 mx-auto bg-white shadow rounded-md overflow-hidden">
@@ -273,87 +273,88 @@ const PanelEvmPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {startSerial > 1 && (
-                    <tr>
-                      <td colSpan={4} className="text-center text-gray-400">
-                        ...
+                  {Number(panel.candidateAdhyakshSerialNo) > 0 ? (
+                    <tr className="border border-gray-300">
+                      <td className="border border-gray-300 p-2 text-center font-semibold text-2xl">
+                        {panel.candidateAdhyakshSerialNo}
                       </td>
-                    </tr>
-                  )}
-
-                  {adhyakshRows.map((row, idx) => (
-                    <tr key={idx} className="border border-gray-300">
-                      {Number(panel.candidateAdhyakshSerialNo) > 0 && (
-                        <td
-                          className={`border border-gray-300 p-2 text-center font-semibold ${
-                            row ? "text-2xl" : "text-xs"
-                          }`}
-                        >
-                          {startSerial + idx}
-                        </td>
-                      )}
-                      <td className="border border-gray-300 p-2">
-                        {row ? (
-                          <span
-                            className="truncate font-bold text-lg"
-                            style={{
-                              fontFamily: "'Anek Devanagari', sans-serif",
-                            }}
+                      <td
+                        className="border border-gray-300 p-2 font-bold text-lg"
+                        style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+                      >
+                        {panel.candidateAdhyakshName}
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        <img
+                          src={panel.candidateAdhyakshSymbolImage}
+                          alt="symbol"
+                          className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                        />
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <div
+                            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                              greenLight === "candidateAdhyakshVotes"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          ></div>
+                          <button
+                            onClick={() => handleVote("candidateAdhyakshVotes")}
+                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                              !panel.multipleVotes &&
+                              localStorage.getItem(
+                                `panelVote_${panel._id}_candidateAdhyakshVotes`
+                              )
+                                ? "bg-gray-400 cursor-not-allowed"
+                                : "bg-blue-600"
+                            }`}
                           >
-                            {row.candidateAdhyakshName}
-                          </span>
-                        ) : (
-                          <span className="text-gray-400 italic">—</span>
-                        )}
-                      </td>
-                      <td className="border border-gray-300 p-2 text-center">
-                        {row ? (
-                          <img
-                            src={row.candidateAdhyakshSymbolImage}
-                            alt="symbol"
-                            className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
-                          />
-                        ) : (
-                          <span className="text-gray-400">—</span>
-                        )}
-                      </td>
-                      <td className="border border-gray-300 p-2 text-center">
-                        {row ? (
-                          <div className="flex items-center justify-center gap-2">
-                            <div
-                              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
-                                greenLight === "candidateAdhyakshVotes"
-                                  ? "bg-green-500"
-                                  : "bg-red-500"
-                              }`}
-                            ></div>
-                            <button
-                              onClick={() =>
-                                handleVote("candidateAdhyakshVotes")
-                              }
-                              className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
-                                !panel.multipleVotes &&
-                                localStorage.getItem(
-                                  `panelVote_${panel._id}_candidateAdhyakshVotes`
-                                )
-                                  ? ` bg-gray-400`
-                                  : `bg-blue-600`
-                              }`}
-                            >
-                              बटन
-                            </button>
-                          </div>
-                        ) : (
-                          <span className="text-gray-400">—</span>
-                        )}
+                            बटन
+                          </button>
+                        </div>
                       </td>
                     </tr>
-                  ))}
-
-                  {endSerial < totalCandidates && (
-                    <tr>
-                      <td colSpan={4} className="text-center text-gray-400">
-                        ...
+                  ) : (
+                    // Serial number is 0 → only show name, symbol, button
+                    <tr className="border border-gray-300">
+                      <td
+                        className="border border-gray-300 p-2 font-bold text-lg"
+                        style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+                      >
+                        {panel.candidateAdhyakshName}
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        <img
+                          src={panel.candidateAdhyakshSymbolImage}
+                          alt="symbol"
+                          className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                        />
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <div
+                            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                              greenLight === "candidateAdhyakshVotes"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          ></div>
+                          <button
+                            onClick={() => handleVote("candidateAdhyakshVotes")}
+                            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                              !panel.multipleVotes &&
+                              localStorage.getItem(
+                                `panelVote_${panel._id}_candidateAdhyakshVotes`
+                              )
+                                ? "bg-gray-400 cursor-not-allowed"
+                                : "bg-blue-600"
+                            }`}
+                          >
+                            बटन
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   )}
