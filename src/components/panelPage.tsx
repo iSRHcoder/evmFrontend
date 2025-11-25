@@ -660,9 +660,11 @@ const PanelEvmPage = () => {
       {/* TOTAL VOTES */}
       <div className="mt-4 p-2 sm:p-2 bg-green-600 text-white text-center font-bold text-sm sm:text-lg rounded-md mx-3 sm:mx-4 mb-3">
         एकूण मते:{" "}
-        {(panel.candidateAVotes ?? 0) +
-          (panel.candidateBVotes ?? 0) +
-          (panel.candidateAdhyakshVotes ?? 0)}
+        {panel.candidateAdhyakshName === "no"
+          ? (panel.candidateAVotes ?? 0) + (panel.candidateBVotes ?? 0)
+          : (panel.candidateAVotes ?? 0) +
+            (panel.candidateBVotes ?? 0) +
+            (panel.candidateAdhyakshVotes ?? 0)}
       </div>
 
       <div className="bg-white border-2 text-black p-1 mt-2 rounded-md sm:text-xs text-[10px] font-semibold shadow">
