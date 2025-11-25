@@ -158,67 +158,18 @@ const PanelEvmPage = () => {
   // -----------------------------
   // DYNAMIC Adhyaksh Rows
   // -----------------------------
-  const totalRowsToShow = 10; // total rows to show
   const adhyakshSerial = panel.candidateAdhyakshSerialNo;
+  const totalCandidates = 20; // total candidates
 
-  // Compute start and end serial numbers
-  let startSerial = adhyakshSerial - Math.floor(totalRowsToShow / 2);
-  let endSerial = adhyakshSerial + Math.floor(totalRowsToShow / 2) - 1;
-
-  // Adjust if out of bounds (less than 1 or bigger than 20)
-  if (startSerial < 1) {
-    endSerial += 1 - startSerial;
-    startSerial = 1;
-  }
-  if (endSerial > 20) {
-    startSerial -= endSerial - 20;
-    endSerial = 20;
-    if (startSerial < 1) startSerial = 1;
-  }
+  const startSerial = Math.max(1, adhyakshSerial - 3);
+  const endSerial = Math.min(totalCandidates, adhyakshSerial + 3);
 
   // Build rows array
   const adhyakshRows = Array.from(
     { length: endSerial - startSerial + 1 },
     (_, i) => {
       const serial = startSerial + i;
-      if (serial === adhyakshSerial) return panel; // actual candidate
-      return null; // empty row
-    }
-  );
-
-  // -----------------------------
-  // DYNAMIC Candidate Rows (A & B)
-  // -----------------------------
-  const highestCandidateSerial = Math.max(
-    panel.candidateASerialNo,
-    panel.candidateBSerialNo
-  );
-
-  const totalCandidateRowsToShow = 10;
-
-  let candidateStartSerial =
-    highestCandidateSerial - Math.floor(totalCandidateRowsToShow / 2);
-  let candidateEndSerial =
-    highestCandidateSerial + Math.floor(totalCandidateRowsToShow / 2) - 1;
-
-  if (candidateStartSerial < 1) {
-    candidateEndSerial += 1 - candidateStartSerial;
-    candidateStartSerial = 1;
-  }
-
-  if (candidateEndSerial > 50) {
-    candidateStartSerial -= candidateEndSerial - 50;
-    candidateEndSerial = 50;
-    if (candidateStartSerial < 1) candidateStartSerial = 1;
-  }
-
-  const candidateRows = Array.from(
-    { length: candidateEndSerial - candidateStartSerial + 1 },
-    (_, i) => {
-      const serial = candidateStartSerial + i;
-      if (panel.candidateASerialNo === serial) return { role: "A", panel };
-      if (panel.candidateBSerialNo === serial) return { role: "B", panel };
-      return null;
+      return serial === adhyakshSerial ? panel : null;
     }
   );
 
@@ -278,7 +229,11 @@ const PanelEvmPage = () => {
                 <span className="text-red-600 font-bold">
                   {panel.candidateAdhyakshSymbolName}
                 </span>{" "}
-                या चिन्हासमोरील बटन दाबून <br />
+                या चिन्हासमोरील{" "}
+                <span className="text-red-600 font-bold">
+                  {panel.candidateAdhyakshSerialNo}
+                </span>{" "}
+                नंबरचे बटन दाबून <br />
                 <span className="text-indigo-600 font-bold">
                   {panel.candidateAdhyakshName}
                 </span>{" "}
@@ -322,7 +277,11 @@ const PanelEvmPage = () => {
 
               {adhyakshRows.map((row, idx) => (
                 <tr key={idx} className="border border-gray-300">
-                  <td className="border border-gray-300 p-2 text-center font-semibold">
+                  <td
+                    className={`border border-gray-300 p-2 text-center font-semibold ${
+                      row ? "text-2xl" : "text-xs"
+                    }`}
+                  >
                     {startSerial + idx}
                   </td>
                   <td className="border border-gray-300 p-2">
@@ -376,7 +335,7 @@ const PanelEvmPage = () => {
                 </tr>
               ))}
 
-              {endSerial < 20 && (
+              {endSerial < totalCandidates && (
                 <tr>
                   <td colSpan={4} className="text-center text-gray-400">
                     ...
@@ -401,203 +360,260 @@ const PanelEvmPage = () => {
       {/*   CANDIDATES A & B TABLE */}
       {/* ===================== */}
       <h2 className="text-center font-bold text-sm mt-2  bg-green-700 text-white p-1 rounded-md">
-        आमचे नगरसेवक पदाचे उमेदवार
+        <p className="text-center font-bold text-sm rounded-md">
+          {[
+            panel.candidateAdhyakshParty?.trim(),
+            panel.candidateAParty?.trim(),
+            panel.candidateBParty?.trim(),
+          ]
+            .filter(
+              (p, i, arr) =>
+                p &&
+                arr.findIndex((x) => x?.toLowerCase() === p.toLowerCase()) === i
+            ) // remove duplicates ignoring case & empty
+            .join(" / ")}{" "}
+          नगरसेवक पदाचे अधिकृत उमेदवार
+        </p>
       </h2>
 
+      {/* ===================== */}
+      {/*   CANDIDATE A TABLE  */}
+      {/* ===================== */}
       <div className="relative mt-2 rounded-lg overflow-hidden">
-        {/* Light overlay for premium look */}
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="text-white rounded-md sm:text-xs text-[10px] bg-[#086cae] font-bold">
-          प्रभाग क्र.{" "}
-          <span className="text-green-400 font-bold">{panel.wardNo}</span> मधील{" "}
-          {panel.candidateAParty !== "no" ? (
-            <span>अधिकृत उमेदवार</span>
-          ) : (
-            <span> अपक्ष उमेदवार</span>
-          )}
-        </div>
-        <div className="relative z-10 flex items-center justify-center bg-[#086cae] gap-3 p-2">
-          {/* ---- Photo A ---- */}
+        <div className="relative z-10 flex items-center justify-center bg-linear-to-r from-purple-600 via-pink-500 to-red-500 gap-3 p-3 rounded-lg shadow-xl">
           <img
             src={panel.candidateAPhoto}
             alt="candidate A"
-            className="w-20 h-24 sm:w-24 sm:h-30 object-fill rounded-lg shadow-lg border border-white"
+            className="w-20 h-24 sm:w-24 sm:h-30 object-fill rounded-lg shadow-lg border-2 border-white"
           />
 
-          {/* ---- Center Text ---- */}
-          <div className="leading-snug text-center px-1">
-            {/* Names Layout */}
-            <div className="flex flex-col items-center justify-center">
-              <h1
-                className="text-[20px] sm:text-[26px] pt-2 font-extrabold text-yellow-500 leading-tight"
-                style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
-              >
-                {panel.candidateAName}
-              </h1>
-
-              <span className="text-xs text-white">आणि</span>
-
-              <h1
-                className="text-[20px] sm:text-[26px] pt-2 font-extrabold text-yellow-500 leading-tight"
-                style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
-              >
-                {panel.candidateBName}
-              </h1>
+          <div className="leading-snug text-center px-2">
+            <div className="text-white rounded-md sm:text-xs text-[12px] bg-black/30 font-bold px-2 py-1">
+              प्रभाग क्र.{" "}
+              <span className="text-yellow-300 font-bold">
+                {panel.wardNo} अ
+              </span>{" "}
+              मधील{" "}
+              {panel.candidateAParty !== "no"
+                ? "अधिकृत उमेदवार"
+                : "अपक्ष उमेदवार"}
             </div>
 
-            {/* Dummy Vote Instruction */}
-            <p className="text-white font-semibold sm:text-xs text-[10px] mt-1">
-              डमी मतदान करण्यासाठी{" "}
-              <span className="text-red-600 font-bold">
-                {panel.candidateASymbolName}
+            <h1
+              className="text-[20px] sm:text-[26px] pt-2 font-extrabold text-yellow-300 leading-tight"
+              style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+            >
+              {panel.candidateAName}
+            </h1>
 
-                {panel.candidateBSymbolName &&
-                  panel.candidateBSymbolName !== panel.candidateASymbolName &&
-                  " / " + panel.candidateBSymbolName}
+            <p className="text-white font-semibold sm:text-xs  text-[10px] mt-1">
+              डमी मतदान करण्यासाठी{" "}
+              <span className="text-black text-sm font-bold">
+                {panel.candidateASymbolName}
               </span>{" "}
               या चिन्हासमोरील निळे बटन दाबावे.
             </p>
           </div>
+        </div>
+      </div>
 
-          {/* ---- Photo B ---- */}
+      {/* Candidate A Voting Table */}
+      <div className="mt-3 overflow-x-auto rounded-t-md">
+        <table className="min-w-full border text-[10px] sm:text-sm">
+          <thead className="bg-[#086cae] text-white font-semibold">
+            <tr>
+              <th className="border border-gray-300 p-2 w-12 text-center">
+                अ.क्र.
+              </th>
+              <th className="border border-gray-300 p-2 w-48">
+                उमेदवाराचे नाव
+              </th>
+              <th className="border border-gray-300 p-2 text-center w-20">
+                चिन्ह
+              </th>
+              <th className="border border-gray-300 p-2 text-center w-20">
+                मत
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border border-gray-300">
+              <td className="border border-gray-300 p-2 text-2xl text-center font-semibold">
+                {panel.candidateASerialNo}
+              </td>
+              <td className="border border-gray-300 text-lg p-2 font-bold">
+                {panel.candidateAName}
+              </td>
+              <td className="border border-gray-300 p-2 text-center">
+                <img
+                  src={panel.candidateASymbolImage}
+                  alt="symbol A"
+                  className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                />
+              </td>
+              <td className="border border-gray-300 p-2 text-center">
+                <div className="flex items-center justify-center gap-2">
+                  <div
+                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                      greenLight === "candidateAVotes"
+                        ? "bg-green-500"
+                        : "bg-red-500"
+                    }`}
+                  ></div>
+                  <button
+                    onClick={() => handleVote("candidateAVotes")}
+                    className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                      !panel.multipleVotes &&
+                      localStorage.getItem(
+                        `panelVote_${panel._id}_candidateAVotes`
+                      )
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-blue-600"
+                    }`}
+                    disabled={
+                      !panel.multipleVotes &&
+                      !!localStorage.getItem(
+                        `panelVote_${panel._id}_candidateAVotes`
+                      )
+                    }
+                  >
+                    बटन
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="font-bold rounded-b-lg mb-2 bg-amber-200 text-blue-700 text-sm p-2">
+        {" "}
+        <span className="text-black">
+          {" "}
+          {panel?.candidateAName} यांना एकूण मत:{" "}
+        </span>{" "}
+        {panel?.candidateAVotes ?? 0} <br />{" "}
+      </div>
+
+      <hr />
+
+      {/* ===================== */}
+      {/*   CANDIDATE B TABLE  */}
+      {/* ===================== */}
+      <div className="relative mt-2 rounded-lg overflow-hidden">
+        <div className="relative z-10 flex items-center justify-center bg-linear-to-r from-purple-600 via-pink-500 to-red-500 gap-3 p-3 rounded-lg shadow-xl">
           <img
             src={panel.candidateBPhoto}
             alt="candidate B"
-            className="w-20 h-24 sm:w-24 sm:h-30 object-fill rounded-lg shadow-lg border border-white"
+            className="w-20 h-24 sm:w-24 sm:h-30 object-fill rounded-lg shadow-lg border-2 border-white"
           />
+
+          <div className="leading-snug text-center px-2">
+            <div className="text-white rounded-md sm:text-xs text-[12px] bg-black/30 font-bold px-2 py-1">
+              प्रभाग क्र.{" "}
+              <span className="text-yellow-300 font-bold">
+                {panel.wardNo} ब
+              </span>{" "}
+              मधील{" "}
+              {panel.candidateBParty !== "no"
+                ? "अधिकृत उमेदवार"
+                : "अपक्ष उमेदवार"}
+            </div>
+
+            <h1
+              className="text-[20px] sm:text-[26px] pt-2 font-extrabold text-yellow-300 leading-tight"
+              style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
+            >
+              {panel.candidateBName}
+            </h1>
+
+            <p className="text-white font-semibold sm:text-xs text-[10px] mt-1">
+              डमी मतदान करण्यासाठी{" "}
+              <span className="text-black text-sm font-bold">
+                {panel.candidateBSymbolName}
+              </span>{" "}
+              या चिन्हासमोरील निळे बटन दाबावे.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="mt-3">
-        <div className="mt-2 overflow-x-auto rounded-t-md">
-          <table className="min-w-full border text-[10px] sm:text-sm">
-            <thead className="bg-[#086cae] text-white font-semibold">
-              <tr>
-                <th className="border border-gray-300 p-2 w-12 text-center">
-                  अ.क्र.
-                </th>
-                <th className="border border-gray-300 p-2 w-48">
-                  उमेदवाराचे नाव
-                </th>
-                <th className="border border-gray-300 p-2 text-center w-20">
-                  चिन्ह
-                </th>
-                <th className="border border-gray-300 p-2 text-center w-20">
-                  मत
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {candidateStartSerial > 1 && (
-                <tr>
-                  <td colSpan={4} className="text-center text-gray-400">
-                    ...
-                  </td>
-                </tr>
-              )}
-
-              {candidateRows.map((slot, idx) => {
-                const serial = candidateStartSerial + idx;
-
-                if (!slot) {
-                  return (
-                    <tr key={idx} className="border border-gray-300">
-                      <td className="border border-gray-300 p-2 text-center font-semibold">
-                        {serial}
-                      </td>
-                      <td className="border border-gray-300 p-2">
-                        <span className="text-gray-400 italic">—</span>
-                      </td>
-                      <td className="border border-gray-300 p-2 text-center">
-                        <span className="text-gray-400">—</span>
-                      </td>
-                      <td className="border border-gray-300 p-2 text-center">
-                        <span className="text-gray-400">—</span>
-                      </td>
-                    </tr>
-                  );
-                }
-
-                const role = slot.role; // "A" or "B"
-
-                const name =
-                  role === "A" ? panel.candidateAName : panel.candidateBName;
-                const symbolImage =
-                  role === "A"
-                    ? panel.candidateASymbolImage
-                    : panel.candidateBSymbolImage;
-                const voteKey =
-                  role === "A" ? "candidateAVotes" : "candidateBVotes";
-                const alreadyVoted =
-                  !panel.multipleVotes &&
-                  !!localStorage.getItem(`panelVote_${panel._id}_${voteKey}`);
-
-                return (
-                  <tr key={idx} className="border border-gray-300">
-                    <td className="border border-gray-300 p-2 text-center font-semibold">
-                      {serial}
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      <span className="truncate font-bold text-sm">{name}</span>
-                    </td>
-                    <td className="border border-gray-300 p-2 text-center">
-                      <img
-                        src={symbolImage}
-                        alt="symbol"
-                        className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
-                      />
-                    </td>
-                    <td className="border border-gray-300 p-2 text-center">
-                      <div className="flex items-center justify-center gap-2">
-                        <div
-                          className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
-                            greenLight === voteKey
-                              ? "bg-green-500"
-                              : "bg-red-500"
-                          }`}
-                        ></div>
-                        <button
-                          onClick={() =>
-                            handleVote(
-                              voteKey as "candidateAVotes" | "candidateBVotes"
-                            )
-                          }
-                          className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
-                            alreadyVoted
-                              ? `bg-gray-400 cursor-not-allowed`
-                              : `bg-blue-600`
-                          }`}
-                          disabled={alreadyVoted}
-                        >
-                          बटन
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-
-              {candidateEndSerial < 50 && (
-                <tr>
-                  <td colSpan={4} className="text-center text-gray-400">
-                    ...
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+      {/* Candidate B Voting Table */}
+      <div className="mt-3 overflow-x-auto rounded-t-md">
+        <table className="min-w-full border text-[10px] sm:text-sm">
+          <thead className="bg-[#086cae] text-white font-semibold">
+            <tr>
+              <th className="border border-gray-300 p-2 w-12 text-center">
+                अ.क्र.
+              </th>
+              <th className="border border-gray-300 p-2 w-48">
+                उमेदवाराचे नाव
+              </th>
+              <th className="border border-gray-300 p-2 text-center w-20">
+                चिन्ह
+              </th>
+              <th className="border border-gray-300 p-2 text-center w-20">
+                मत
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border border-gray-300">
+              <td className="border border-gray-300 p-2 text-center text-2xl font-semibold">
+                {panel.candidateBSerialNo}
+              </td>
+              <td className="border border-gray-300 text-lg p-2 font-bold">
+                {panel.candidateBName}
+              </td>
+              <td className="border border-gray-300 p-2 text-center">
+                <img
+                  src={panel.candidateBSymbolImage}
+                  alt="symbol B"
+                  className="w-10 h-10 sm:w-15 sm:h-15 mx-auto rounded-full border border-black"
+                />
+              </td>
+              <td className="border border-gray-300 p-2 text-center">
+                <div className="flex items-center justify-center gap-2">
+                  <div
+                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors duration-300 ${
+                      greenLight === "candidateBVotes"
+                        ? "bg-green-500"
+                        : "bg-red-500"
+                    }`}
+                  ></div>
+                  <button
+                    onClick={() => handleVote("candidateBVotes")}
+                    className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm ${
+                      !panel.multipleVotes &&
+                      localStorage.getItem(
+                        `panelVote_${panel._id}_candidateBVotes`
+                      )
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-blue-600"
+                    }`}
+                    disabled={
+                      !panel.multipleVotes &&
+                      !!localStorage.getItem(
+                        `panelVote_${panel._id}_candidateBVotes`
+                      )
+                    }
+                  >
+                    बटन
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div className="font-bold rounded-b-lg bg-amber-300 text-blue-700 text-sm p-2">
+      <div className="font-bold rounded-b-lg bg-amber-200 text-blue-700 text-sm p-2">
+        {" "}
         <span className="text-black">
-          {panel?.candidateAName} यांना एकूण मत:
+          {" "}
+          {panel?.candidateBName} यांना एकूण मत:{" "}
         </span>{" "}
-        {panel?.candidateAVotes ?? 0} <br />
-        <span className="text-black">
-          {panel?.candidateBName} यांना एकूण मत:
-        </span>{" "}
-        {panel?.candidateBVotes ?? 0}
+        {panel?.candidateBVotes ?? 0}{" "}
       </div>
 
       {/* TOTAL VOTES */}
