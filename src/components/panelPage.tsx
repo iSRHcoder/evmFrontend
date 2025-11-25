@@ -379,10 +379,9 @@ const PanelEvmPage = () => {
             </span>{" "}
             {panel?.candidateAdhyakshVotes ?? 0}
           </div>
+          <hr />
         </>
       )}
-
-      <hr />
 
       {/* ===================== */}
       {/*   CANDIDATES A & B TABLE */}
