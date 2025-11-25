@@ -624,24 +624,6 @@ const PanelEvmPage = () => {
           (panel.candidateAdhyakshVotes ?? 0)}
       </div>
 
-      {/* POSTER BUTTON */}
-      {panel.candidatePoster && (
-        <button
-          onClick={() => {
-            localStorage.removeItem("posterShown");
-            setShowPoster(true);
-          }}
-          className="
-    mx-auto mb-4 px-4 py-2 
-    bg-blue-600 text-white text-xs font-semibold 
-    rounded-full shadow-md hover:bg-blue-700 
-    transition-all duration-200 block
-  "
-        >
-          पोस्टर पहा
-        </button>
-      )}
-
       <div className="bg-white border-2 text-black p-1 mt-2 rounded-md sm:text-xs text-[10px] font-semibold shadow">
         मतदानाच्या दिवशीसुद्धा दोन्ही EVM मशीन वरील{" "}
         <span className="text-red-600 font-bold">
@@ -703,6 +685,24 @@ const PanelEvmPage = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* POSTER BUTTON */}
+      {panel.candidatePoster && (
+        <button
+          onClick={() => {
+            localStorage.removeItem("posterShown");
+            setShowPoster(true);
+          }}
+          className="
+    mx-auto mt-3 px-4 py-2 
+    bg-red-600 text-white text-xs font-semibold 
+    rounded-full shadow-md
+    transition-all duration-200 block
+  "
+        >
+          पोस्टर पहा
+        </button>
       )}
     </div>
   );
