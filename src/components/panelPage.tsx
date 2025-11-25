@@ -292,7 +292,7 @@ const PanelEvmPage = () => {
       {/* ===================== */}
       {/*   ADHYAKSH EVM TABLE  */}
       {/* ===================== */}
-      <div className="mt-4">
+      <div className="mt-3 ">
         <div className="mt-2 overflow-x-auto rounded-t-md">
           <table className="min-w-full border text-[10px] sm:text-sm">
             <thead className="bg-[#086cae] text-white font-semibold">
