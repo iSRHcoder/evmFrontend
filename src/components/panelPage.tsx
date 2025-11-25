@@ -119,7 +119,8 @@ const PanelEvmPage = () => {
     }
   };
 
-  if (loading) return <div className="p-4 text-center">Loading...</div>;
+  if (loading)
+    return <div className="p-4 text-center">कृपया प्रतीक्षा करा...</div>;
   if (!panel) return <div className="p-4 text-center text-xl">Not Found</div>;
 
   // If poster should be shown first (like EvmPage behavior)
@@ -400,7 +401,7 @@ const PanelEvmPage = () => {
             </div>
 
             <h1
-              className="text-[20px] sm:text-[26px] pt-2 font-extrabold text-yellow-300 leading-tight"
+              className="text-[20px] sm:text-[26px] pt-3 font-extrabold text-yellow-300 leading-tight"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
               {panel.candidateAName}
@@ -521,7 +522,7 @@ const PanelEvmPage = () => {
             </div>
 
             <h1
-              className="text-[20px] sm:text-[26px] pt-2 font-extrabold text-yellow-300 leading-tight"
+              className="text-[20px] sm:text-[26px] pt-3 font-extrabold text-yellow-300 leading-tight"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
               {panel.candidateBName}
