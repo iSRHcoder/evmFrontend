@@ -273,8 +273,10 @@ const EvmPage = () => {
                   // Serial numbers exist → show all fixedRows
                   fixedRows.map((c, idx) => (
                     <tr key={idx} className="border border-gray-300">
-                      <td className="border border-gray-300 p-2 text-center font-semibold">
-                        {c ? idx + 1 : "—"}
+                      <td className="border border-gray-300 p-2 text-center text-sm">
+                        {c ? (<span className="font-bold"  style={{
+                              fontFamily: "'Anek Devanagari', sans-serif",
+                            }}>{idx + 1}</span>) : (<span className="text-gray-400 italic">—</span>)}
                       </td>
                       <td className="border border-gray-300 p-2 ">
                         {c ? (
