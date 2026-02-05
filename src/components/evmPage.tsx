@@ -112,7 +112,7 @@ const EvmPage = () => {
   }
 
   // Build 10 fixed rows
-  const fixedRows = Array.from({ length: 11 }, (_, i) => {
+  const fixedRows = Array.from({ length: 7 }, (_, i) => {
     const serial = i + 1;
     return candidates.find((c) => Number(c.serialNo) === serial) || null;
   });
@@ -168,7 +168,7 @@ const EvmPage = () => {
               className="bg-white sm:text-lg text-[15px] text-black font-bold text-center pt-2 rounded-md shadow"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
-              {banner.constituency} नगरपालिका सार्वत्रिक निवडणूक 2025
+              {banner.constituency} जिल्हा परिषद निवडणूक 2026
             </div>
 
             <div className="relative mt-2 rounded-lg overflow-hidden">
@@ -183,11 +183,11 @@ const EvmPage = () => {
                 <div className="leading-snug">
                   {banner.wardNo !== "no" ? (
                     <div className=" text-white rounded-md sm:text-xs text-[10px] font-bold">
-                      प्रभाग क्र.{" "}
+                     
                       <span className="text-green-400 font-bold">
                         {banner.wardNo}
                       </span>{" "}
-                      मधील{" "}
+                      सर्कलमधील{" "}
                       {banner.party !== "no" ? (
                         <span>
                           <span className="text-red-300 font-bold">
@@ -209,15 +209,15 @@ const EvmPage = () => {
                   )}
                   <div className="flex flex-col xs:flex-row justify-around items-center">
                     <h1
-                      className="text-[22px] sm:text-[27px] pt-2 font-extrabold text-yellow-500"
+                      className="text-[32px] sm:text-[32px] pt-2 font-extrabold text-yellow-500"
                       style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
                     >
                       {banner.candidateName}
                     </h1>
                   </div>
                   <p className="text-white font-semibold sm:text-xs text-[10px]">
-                    डमी मतदान करण्यासाठी{" "}
-                    <span className="text-green-400 ">{banner.symbolName}</span>{" "}
+                    यांना डमी मतदान करण्यासाठी{" "}
+                    <span className="text-green-400 text-lg font-bold!">{banner.symbolName}</span>{" "}
                     या चिन्हासमोरील निळे बटन दाबावे.
                   </p>
                   <div className="bg-white text-black p-1 mt-2 rounded-md sm:text-xs text-[10px] font-semibold shadow">
@@ -242,7 +242,7 @@ const EvmPage = () => {
               className="text-white font-semibold text-[13px] pt-2 pb-1"
               style={{ fontFamily: "'Anek Devanagari', sans-serif" }}
             >
-              मतदान दि. 02 डिसेंबर 2025 - वेळ: सकाळी 07:00 ते सायं. 05:30 पर्यंत
+              मतदान दि. 07 फेब्रुवारी 2026 - वेळ: सकाळी 07:30 ते सायं. 05:30 पर्यंत
             </p>
           </div>
 
